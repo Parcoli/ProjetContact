@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Create Contact</title>
+</head>
+<body>
+<h1>Create a Contact</h1>
+<form action="#" th:action="@{/contacts}" th:object="${contact}" method="post">
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" th:field="*{firstName}"/>
+  <br/>
+  <label for="lastName">First Name:</label>
+  <input type="text" id="lastName" th:field="*{lastName}"/>
+  <br/>
+  <button type="submit">Create Contact</button>
+</form>
+<a href="/contacts">To Contact List</a>
+</body>
+</html>

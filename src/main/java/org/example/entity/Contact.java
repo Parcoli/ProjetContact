@@ -17,11 +17,11 @@ public class Contact {
     private String firstName;
     private String lastName;
 
-    @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "contact")
     private Set<Email> emails = new HashSet<>();
 
 
-    @ManyToMany(mappedBy = "contacts", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "contacts")
     private List<Address> addresses = new ArrayList<>();
 
     // private String postalAdresses;
@@ -37,26 +37,54 @@ public class Contact {
         // this.mailAdresse = mailAdresse;
     }
 
-    @Override
-    public String toString() {
-        return String.format(
-                // "Customer[id=%d, firstName='%s', lastName='%s', postalAdresses='%s', mailAdresse='%s']",
-                "Customer[id=%d, firstName='%s', lastName='%s']",
-                id, firstName, lastName);
-                // postalAdresses, mailAdresse);
+    public long getId() {
+        return id;
     }
 
-    public Long getId() {
-        return id;
+    public void setId(long id) {
+        this.id = id;
     }
 
     public String getFirstName() {
         return firstName;
     }
 
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
     public String getLastName() {
         return lastName;
     }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public Set<Email> getEmails() {
+        return emails;
+    }
+
+    public void setEmails(Set<Email> emails) {
+        this.emails = emails;
+    }
+
+    public List<Address> getAddresses() {
+        return addresses;
+    }
+
+    public void setAddresses(List<Address> addresses) {
+        this.addresses = addresses;
+    }
+    /*  @Override
+    public String toString() {
+        return String.format(
+                // "Customer[id=%d, firstName='%s', lastName='%s', postalAdresses='%s', mailAdresse='%s']",
+                "Customer[id=%d, firstName='%s', lastName='%s']",
+                id, firstName, lastName);
+                // postalAdresses, mailAdresse);
+    }*/
+
 
     // public String getPostalAdresses() {return postalAdresses;}
 

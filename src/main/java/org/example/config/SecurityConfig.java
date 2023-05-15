@@ -21,7 +21,7 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests()
                 // API is not secured for simple purpose
-                .requestMatchers("/contacts").authenticated()
+                .requestMatchers("/contacts/*").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()

@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Modify Contact</title>
+</head>
+<body>
+<h1>Modify this Contact</h1>
+<form action="#" th:action="@{/contacts/{id}(id=${contact.id})}" th:object="${contact}" method="post">
+  <input type="hidden" th:field="*{id}"/>
+  <label for="firstName">First Name:</label>
+  <input type="text" id="firstName" th:field="*{firstName}"/>
+  <br/>
+  <label for="lastName">First Name:</label>
+  <input type="text" id="lastName" th:field="*{lastName}"/>
+  <br/>
+  <button type="submit">Modify Contact</button>
+</form>
+<a href="/contacts">To Contact List</a>
+</body>
+</html>

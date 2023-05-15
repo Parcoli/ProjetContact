@@ -22,14 +22,14 @@ public class UserController {
         return "redirect:/contacts/list";
     }
     @GetMapping("/signup")
-    public String showRegistrationForm(Model model) {
+    public String getSignUpTemplate(Model model) {
         SignUpData signUpData = new SignUpData();
         model.addAttribute("user", signUpData);
         return "signup";
     }
 
     @PostMapping("/signup")
-    public String registerUserAccount(@ModelAttribute("user") @Validated SignUpData user, Model model) {
+    public String userSignUp(@ModelAttribute("user") @Validated SignUpData user, Model model) {
         try {
             authentificationService.registerUser(user);
         } catch (Exception e) {
