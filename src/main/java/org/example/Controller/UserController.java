@@ -1,6 +1,8 @@
 package org.example.Controller;
 
+import org.example.service.AuthentificationService;
 import org.example.signup.SignUpData;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.annotation.Validated;
@@ -12,6 +14,8 @@ import org.springframework.web.context.request.WebRequest;
 @Controller
 public class UserController {
 
+    @Autowired
+    private AuthentificationService authentificationService;
     @GetMapping("/signup")
     public String showRegistrationForm(WebRequest request, Model model) {
         SignUpData signUpData = new SignUpData();
@@ -22,12 +26,12 @@ public class UserController {
     @PostMapping("/signup")
     public String registerUserAccount(@ModelAttribute("user") @Validated SignUpData user, Model model) {
         try {
-            authService.registerUser(user);
+            authentificationService.registerUser(user);
         } catch (Exception e) {
             model.addAttribute("message", e.getMessage());
-            return "registration";
+            return "signup";
         }
 
-        return "redirect:/login";
+        return "redirect:/signin";
     }
 }

@@ -10,4 +10,21 @@ public class User {
     private String hashedPassword;
 
     public User() {}
+
+    public void setUsername(String userName)
+    {
+        this.username = userName;
+    }
+
+    public String getHashedPassword()
+    {
+        return hashedPassword;
+    }
+
+    public void setHashedPassword(String userName)
+    {
+        this.username = userName;
+    }
+
+
 }
