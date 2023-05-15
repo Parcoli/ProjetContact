@@ -9,6 +9,7 @@ import org.springframework.security.config.annotation.web.configuration.EnableWe
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.security.web.util.matcher.AntPathRequestMatcher;
 
 @EnableWebSecurity
 @Configuration
@@ -21,7 +22,10 @@ public class SecurityConfig {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         return http.authorizeHttpRequests()
                 // API is not secured for simple purpose
-                .requestMatchers("/contacts/*").authenticated()
+                .requestMatchers("/contacts/**").authenticated()
+                //.requestMatchers("contacts/add").authenticated()
+                //.requestMatchers("contacts/{id}/modify").authenticated()
+                //.requestMatchers("contacts/{id}/delete").authenticated()
                 .anyRequest().permitAll()
                 .and()
                 .formLogin()
@@ -31,6 +35,12 @@ public class SecurityConfig {
                 .and()
                 .userDetailsService(authentificationService)
                 .csrf().disable().build();
+                /*
+                .csrf().requireCsrfProtectionMatcher(new AntPathRequestMatcher("/contacts/**"))
+                .and()
+                .build();
+                 */
+
     }
 
     @Bean

@@ -22,11 +22,11 @@ public class AuthentificationService implements UserDetailsService {
 
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        Optional<User> potentialUser = userRepository.findById(username);
-        if (!potentialUser.isPresent()) {
+        Optional<User> optUser = userRepository.findById(username);
+        if (!optUser.isPresent()) {
             throw new UsernameNotFoundException(String.format("Username %s was not found in registered users", username));
         }
-        User user = potentialUser.get();
+        User user = optUser.get();
         return  org.springframework.security.core.userdetails.User
                 .withUsername(username)
                 .password(user.getHashedPassword())

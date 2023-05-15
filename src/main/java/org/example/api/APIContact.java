@@ -11,19 +11,19 @@ import org.springframework.web.bind.annotation.*;
 import java.util.Optional;
 
 @RestController
-@RequestMapping(path="/contacts", produces={MediaType.APPLICATION_XML_VALUE, MediaType.APPLICATION_JSON_VALUE})
+@RequestMapping(path="/api", produces={MediaType.APPLICATION_XML_VALUE})
 public class APIContact {
 
     @Autowired
     private ContactRepository contactRepository;
 
-    @GetMapping("/list")
+    @GetMapping("/listContacts")
     public Iterable<Contact> getContactsList()
     {
         return contactRepository.findAll();
     }
 
-    @GetMapping("/{id}")
+    @GetMapping("/getContact/{id}")
     public ResponseEntity<Contact> getContactById(@PathVariable("id") long id)
     {
         Optional<Contact> contact = contactRepository.findById(id);
@@ -34,30 +34,24 @@ public class APIContact {
         }
     }
 
-    @PostMapping("")
-    public ResponseEntity<Contact> createContact(@RequestBody Contact contact)
+
+    // Je n'arrive pas a faire fonctionner la méthode de suppression, j''ai une erreur 405 quoique je fasse
+    // Pourtant je ne rencontre pas ce problème avec la méthode pour récupérer tout les contacts et pour récupérer un contact par ID
+    @DeleteMapping("/delContact/{id}")
+    public ResponseEntity<Contact> deleteContactById(@PathVariable("id") long id)
     {
-        Contact newContact = contactRepository.save(contact);
-        return new ResponseEntity<>(newContact, HttpStatus.CREATED);
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<Contact> modifyContact(@PathVariable("modify/id") long id, @RequestBody Contact contact)
-    {
-        Optional<Contact> Optcontact = contactRepository.findById(id);
-
-        if (Optcontact.isPresent()) {
-            Contact realContact = Optcontact.get();
-            realContact.setLastName(contact.getLastName());
-            realContact.setFirstName(contact.getFirstName());
-            realContact.setEmails(contact.getEmails());
-
-            Contact modifiedContact = contactRepository.save(realContact);
-            return new ResponseEntity<>(modifiedContact, HttpStatus.OK);
-        } else {
-            return new ResponseEntity<>(HttpStatus.NOT_FOUND);
+        Optional<Contact> contact = contactRepository.findById(id);
+        if (contact.isPresent()) {
+            contactRepository.deleteById(id);
+            return new ResponseEntity<>(contact.get(),HttpStatus.NO_CONTENT);
+        }
+        else
+        {
+            return new ResponseEntity<>(contact.get(),HttpStatus.NOT_FOUND);
         }
     }
+
+
 
 
 
