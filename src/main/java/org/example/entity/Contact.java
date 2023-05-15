@@ -19,6 +19,11 @@ public class Contact {
 
     @OneToMany(mappedBy = "contact", cascade = CascadeType.ALL, orphanRemoval = true)
     private Set<Email> emails = new HashSet<>();
+
+
+    @ManyToMany(mappedBy = "contacts", cascade = CascadeType.ALL)
+    private List<Address> addresses = new ArrayList<>();
+
     // private String postalAdresses;
 
     // private String mailAdresse;

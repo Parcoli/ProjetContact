@@ -13,4 +13,9 @@ public class Email {
 
     @ManyToOne(fetch = FetchType.LAZY)
     private Contact contact;
+
+    public Email()
+    {
+
+    }
 }
