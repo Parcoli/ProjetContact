@@ -18,9 +18,10 @@ public class SecurityConfig {
                 .requestMatchers("/contacts").authenticated()
                 .anyRequest().permitAll()
                 .and()
-                .formLogin()
+                .formLogin((formLogin) -> formLogin.loginPage("/signin"))
+                /*.
                 .permitAll()
-                .and()
+                .and()*/
                 .logout()
                 .and()
                 // .userDetailsService(authService)
