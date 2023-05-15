@@ -2,7 +2,7 @@ package org.example.service;
 
 import org.example.entity.User;
 import org.example.exception.PasswordException;
-import org.example.exception.userException;
+import org.example.exception.UserException;
 import org.example.repository.UserRepository;
 import org.example.signup.SignUpData;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -36,14 +36,14 @@ public class AuthentificationService implements UserDetailsService {
 
     public void registerUser(SignUpData signUpData) throws Exception {
         if (userRepository.findById(signUpData.getUsername()).isPresent()) {
-            throw new userException();
+            throw new UserException();
         }
 
         if (signUpData.getPassword() == null || signUpData.getPassword().isEmpty()) {
             throw new PasswordException();
         }
 
-        if (!Objects.equals(signUpData.getPassword(), signUpData.getMatchingPassword())) {
+        if (!Objects.equals(signUpData.getPassword(), signUpData.getConfirmPassword())) {
             throw new PasswordException();
         }
 

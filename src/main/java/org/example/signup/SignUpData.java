@@ -23,11 +23,11 @@ public class SignUpData {
         this.password = password;
     }
 
-    public String getMatchingPassword() {
+    public String getConfirmPassword() {
         return confirmPassword;
     }
 
-    public void setMatchingPassword(String matchingPassword) {
-        this.confirmPassword = matchingPassword;
+    public void setConfirmPassword(String confirmPassword) {
+        this.confirmPassword = confirmPassword;
     }
 }

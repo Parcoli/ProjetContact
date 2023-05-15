@@ -16,8 +16,13 @@ public class UserController {
 
     @Autowired
     private AuthentificationService authentificationService;
+
+    @GetMapping("/")
+    public String index() {
+        return "redirect:/contacts/list";
+    }
     @GetMapping("/signup")
-    public String showRegistrationForm(WebRequest request, Model model) {
+    public String showRegistrationForm(Model model) {
         SignUpData signUpData = new SignUpData();
         model.addAttribute("user", signUpData);
         return "signup";
@@ -32,6 +37,6 @@ public class UserController {
             return "signup";
         }
 
-        return "redirect:/signin";
+        return "redirect:/login";
     }
 }

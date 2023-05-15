@@ -1,7 +1,7 @@
 package org.example.exception;
 
-public class userException extends  Exception{
-    public userException() {
+public class UserException extends  Exception{
+    public UserException() {
 
         super("this username is already used");
     }
